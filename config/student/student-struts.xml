@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Struts2配置文件的DTD信息 -->
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+
+<!-- Struts2配置文件的根元素 -->
+<struts>
+	<!-- 指定struts2是否以开发模式运行
+			1.热加载主配置.(不需要重启即可生效)
+			2.提供更多错误信息输出,方便开发时的调试
+	 -->
+	<!-- <constant name="struts.devMode" value="true"></constant> -->
+	
+	
+	<package name="student" extends="default" namespace="/student">
+		<action name="StudentAction-*" class="studentAction" method="{1}">
+			<result name="list">/view/student/listStu.jsp</result>
+			<result name="updateOrAdd">/view/student/updateOrAdd.jsp</result>
+			<result name="toList" type="redirectAction">
+				<param name="namespace">/student</param>
+				<param name="actionName">StudentAction-list</param>		
+			</result>
+		</action>
+		<action name="CheckAction-*" class="checkAction" method="{1}">
+			<result name="list">/view/student/listChecked.jsp</result>
+			<result name="updateOrAdd">/view/student/addChecked.jsp</result>
+			<result name="update">/view/student/updateChecked.jsp</result>
+			<result name="toList" type="redirectAction">
+				<param name="namespace">/student</param>
+				<param name="actionName">CheckAction-list</param>	
+			</result>
+			<result name="toupdate" type="redirectAction">
+				<param name="namespace">/student</param>
+				<param name="actionName">CheckAction-list</param>
+			</result>
+		</action>
+		<action name="ClazzAction-*" class="clazzAction" method="{1}">
+			<result name="list">/view/student/listClazz.jsp</result>
+		</action>
+		<action name="TalkAction-*" class="talkAction" method="{1}">
+			<result name="list">/view/student/listTalk.jsp</result>
+			<result name="updateOrAdd">/view/student/addTalk.jsp</result>
+			<result name="update">/view/student/updateTalk.jsp</result>
+			<result name="toList" type="redirectAction">
+				<param name="namespace">/student</param>
+				<param name="actionName">TalkAction-list</param>	
+			</result>
+			<result name="toupdate" type="redirectAction">
+				<param name="namespace">/student</param>
+				<param name="actionName">TalkAction-list</param>
+			</result>
+		</action>
+	</package>
+	
+</struts>

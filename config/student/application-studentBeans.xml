@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          	http://www.springframework.org/schema/context 
+          	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	
+    <bean name="studentDao" class="daoImpl.student.StudentDaoImpl">
+    	<property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean name="checkDao" class="daoImpl.student.CheckDaoImpl">
+    	<property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean name="clazzDao" class="daoImpl.student.ClazzDaoImpl">
+    	<property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean name="talkDao" class="daoImpl.student.TalkDaoImpl">
+    	<property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    
+    <bean name="studentService" class="serviceImpl.student.StudentServiceImpl">
+    	<property name="studentDao" ref="studentDao"></property>
+    </bean>
+    <bean name="checkService" class="serviceImpl.student.CheckServiceImpl">
+    	<property name="checkDao" ref="checkDao"></property>
+    </bean>
+    <bean name="clazzService" class="serviceImpl.student.ClazzServiceImpl">
+    	<property name="clazzDao" ref="clazzDao"></property>
+    </bean>
+    <bean name="talkService" class="serviceImpl.student.TalkServiceImpl">
+    	<property name="talkDao" ref="talkDao"></property>
+    </bean>
+    
+    
+    <bean name="studentAction" class="action.student.StudentAction" scope="prototype">
+    	<property name="studentService" ref="studentService"></property>
+    	<property name="clazzService" ref="clazzService"></property>
+    </bean>
+    <bean name="checkAction" class="action.student.CheckAction" scope="prototype">
+    	<property name="checkService" ref="checkService"></property>
+    	<property name="clazzService" ref="clazzService"></property>
+    	<property name="studentService" ref="studentService"></property>
+    </bean>
+    <bean name="clazzAction" class="action.student.ClazzAction" scope="prototype">
+    	<property name="clazzService" ref="clazzService"></property>
+    </bean>
+     <bean name="talkAction" class="action.student.TalkAction" scope="prototype">
+    	<property name="talkService" ref="talkService"></property>
+    	<property name="clazzService" ref="clazzService"></property>
+    	<property name="studentService" ref="studentService"></property>
+    </bean>
+</beans>

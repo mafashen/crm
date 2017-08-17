@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="entity.classes">
+	<class name="Review_Case" table="review_case">
+		<id name="id">
+			<generator class="native" />			
+		</id>
+		<property name="grade"/>
+		<many-to-one name="rev_id" class="entity.classes.Review" column="rev_id" lazy="false"/>
+		<many-to-one name="stu_id" class="entity.student.Student" column="stu_id" lazy="false"/>
+	</class>
+</hibernate-mapping>

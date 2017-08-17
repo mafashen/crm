@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="entity.student" >
+	<class name="Clazz" table="clazz" >
+		<id name="zz_id"  >
+			<generator class="native"></generator>
+		</id>
+		<property name="zz_subject"  ></property>
+		<property name="zz_name"  ></property>
+		<property name="zz_open_date"  ></property>
+		<many-to-one name="zz_con" column="zz_con" class="entity.market.Consulation"></many-to-one>
+		<many-to-one name="teacher" column="teacher_id" class="entity.system.User"></many-to-one>
+		<many-to-one name="advisor" column="advisor_id" class="entity.system.User"></many-to-one>
+	</class>
+</hibernate-mapping>

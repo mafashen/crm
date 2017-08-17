@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Struts2配置文件的DTD信息 -->
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<!-- Struts2配置文件的根元素 -->
+<struts>
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+	<constant name="struts.configuration.xml.reload" value="true"/>
+	<constant name="struts.configuration.xml.reload" value="true"/>
+	
+	<!-- 配置了系列常量 -->
+	<package name="default" extends="struts-default">
+		<interceptors>
+			<!--定义一个名为authority的拦截器 -->
+			<interceptor class="interceptor.LoginInterceptor"
+				name="login" />
+			<!-- 定义一个包含权限检查的拦截器栈 -->
+			<interceptor-stack name="mydefault">
+				<!-- 配置自定义的拦截器 -->
+				<interceptor-ref name="login">
+				</interceptor-ref>
+				<!-- 配置内建默认拦截器 -->
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors> 
+
+		<!-- <default-interceptor-ref name="mydefault"></default-interceptor-ref> -->
+
+		<!--定义全局Result -->
+		<global-results>
+			<result name="login">/login.jsp</result>
+			<result name="error">/error.html</result>
+		</global-results>
+		
+		<action name="login-*" class="loginAction" method="{1}">
+			<result name="error">login.jsp</result>
+			<result name="logout">login.jsp</result>
+			<result name="success" type="redirect">/home.jsp</result>
+		</action>
+		<action name="home" class="homeAction" >
+			<result name="success" >/right.jsp</result>
+		</action>
+		
+		
+	</package>
+	
+	
+	<package name="zy" namespace="/" extends="json-default">
+		<action name="company-*" class="action.job.companyAction" method="{1}">
+			<result name="add" type="redirectAction">
+			<param name="actionName">company-listAll</param>
+			<param name="namespace">/</param>
+			<param name="currentPage">1</param>
+			</result>
+			<result name="change">company_add.jsp</result>
+			<result name="find">/view/job/QiYeGuanli.jsp</result>
+		</action>
+		<action name="company-listAll" class="action.job.companyAction" method="listAll">
+			<result name="listAll">/view/job/QiYeGuanli.jsp</result>
+		</action>
+		
+		<action name="interview-*" class="action.job.interviewAction" method="{1}">
+			<result name="{1}">/view/job/interview_add.jsp</result>
+			<result name="listStudent" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="listInterview" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="save" type="redirectAction">
+				<param name="actionName">interview-listAll</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="change">/view/job/interview_change.jsp</result>
+			<result name="find">/view/job/MianShiGuanli.jsp</result>
+		</action>
+		<action name="interview-listAll" class="action.job.interviewAction" method="listAll">
+			<result name="listAll">/view/job/MianShiGuanli.jsp</result>
+		</action>
+		
+		<action name="work-information" class="action.job.interviewAction" method="information">
+			<result name="information">/view/job/work_add.jsp</result>
+		</action>
+		<action name="work-*" class="action.job.workAction" method="{1}">
+			<result name="save" type="redirectAction">
+				<param name="actionName">work-listAll</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="change">/view/job/work_change.jsp</result>
+			<result name="find">/view/job/RuZhiGuanli.jsp</result>
+			<result name="info">/view/job/visit_info.jsp</result>
+		</action>
+		<action name="work-listAll" class="action.job.workAction" method="listAll">
+			<result name="listAll">/view/job/RuZhiGuanli.jsp</result>
+		</action>
+		
+		<action name="visit-*" class="action.job.visitAction" method="{1}">
+			<result name="save" type="redirectAction">
+				<param name="actionName">visit-listAll</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="listStudents">/view/job/visit_add.jsp</result>
+			<result name="change">/view/job/visit_add.jsp</result>
+			<result name="find">/view/job/HuiFangGuanli.jsp</result>
+		</action>
+		<action name="visit-listAll" class="action.job.visitAction" method="listAll">
+			<result name="listAll">/view/job/HuiFangGuanli.jsp</result>
+		</action>
+		
+	</package>
+	
+	<include file="classes/classes-struts.xml" />
+	<include file="system/system-struts.xml" />
+	<include file="market/market-struts.xml" />
+	<include file="student/student-struts.xml"></include>
+</struts>

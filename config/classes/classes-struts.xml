@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Struts2配置文件的DTD信息 -->
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<!-- Struts2配置文件的根元素 -->
+<struts>
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
+	<constant name="struts.configuration.xml.reload" value="true"/>
+	<package name="classes" namespace="/classes" extends="json-default">
+	<!-- 配置了系列常量 -->
+	
+		<!-- 配置一个cla通配符 -->
+		<action name="review-*" class="ReviewAction" method="{1}">
+			<result name="{1}">/view/classes/{1}.jsp</result>
+			<result name="input">/view/classes/input.jsp</result>
+			<result name="s_grade" type="redirectAction">
+				<param name="actionName">review-input</param>
+				<param name="namespace">/classes</param>
+			</result>
+		</action>
+		<action name="review-input" class="ReviewAction" method="input">
+			<result name="input">/view/classes/input.jsp</result>
+		</action>
+		<action name="classes-*" class="claAction" method="{1}">
+			<result name="{1}">/view/classes/{1}.jsp</result>
+			<result name="save">/view/classes/list.jsp</result>
+		</action>
+		
+		<action name="addClass-*" class="addClassAction" method="{1}">
+			<result>/view/classes/addClass.jsp</result>
+			<result name="addSuccess" type="redirectAction">
+				<param name="actionName">addClass-execute</param>
+			</result>
+		</action>
+	</package>
+</struts>

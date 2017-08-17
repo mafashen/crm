@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="entity.classes">
+	<class name="Review" table="review">
+		<id name="id">
+			<generator class="native" />			
+		</id>
+		<property name="name"/>
+		<property name="review_time"/>
+		<many-to-one name="Ps" class="entity.student.Clazz" column="zz_id" lazy="false"/>
+		<many-to-one name="teacher" class="entity.system.User" column="teacher_id" lazy="false"/>
+	</class>
+</hibernate-mapping>

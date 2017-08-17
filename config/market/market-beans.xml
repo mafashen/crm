@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+        <!-- 配置dao -->
+   		<bean id="statedao" class="daoImpl.market.StateDaoImpl">
+    		<constructor-arg name="sessionFactory" ref="sessionFactory"></constructor-arg>
+   		</bean>
+   		<bean id="cld" class="daoImpl.market.ChannelDaoImpl">
+    		<constructor-arg name="sessionFactory" ref="sessionFactory"></constructor-arg>
+   		</bean>
+   		<bean id="cd" class="daoImpl.market.ConsulationDaoImpl">
+    		<constructor-arg name="sessionFactory" ref="sessionFactory"></constructor-arg>
+   		</bean>
+   		<bean id="csd" class="daoImpl.market.CustomerDaoImpl">
+    		<constructor-arg name="sessionFactory" ref="sessionFactory"></constructor-arg>
+   		</bean>
+   		
+   		<!-- 配置service -->
+    	<bean id="stateservice" class="serviceImpl.market.StateServiceImpl" >
+    		<property name="statedao" ref="statedao"/>
+    	</bean>
+    	<bean id="channelservice" class="serviceImpl.market.ChannelServiceImpl" >
+    		<property name="cld" ref="cld"/>
+    	</bean>
+    	<bean id="consulationservice" class="serviceImpl.market.ConsulationServiceImpl" >
+    		<property name="cd" ref="cd"/>
+    	</bean>
+    	<bean id="customerservice" class="serviceImpl.market.CustomerServiceImpl" >
+    		<property name="csd" ref="csd"/>
+    	</bean>
+    	
+    	<!-- 配置action -->
+   	 	<bean id="stateAction" class="action.market.StateAction" scope="prototype">
+    		<property name="stateservice" ref="stateservice"/>
+    	</bean>
+    	<bean id="channelAction" class="action.market.ChannelAction" scope="prototype">
+    		<property name="channelservice" ref="channelservice"/>
+    	</bean>
+    	<bean id="consulationAction" class="action.market.ConsulationAction" scope="prototype">
+    		<property name="consulationservice" ref="consulationservice"/>
+    	</bean>
+    	<bean id="customerAction" class="action.market.CustomerAction" scope="prototype">
+    		<property name="customerservice" ref="customerservice"/>
+    		<property name="consulationservice" ref="consulationservice"/>
+    		<property name="channelservice" ref="channelservice"/>
+    		<property name="stateservice" ref="stateservice"/>
+    	</bean>
+    	
+</beans>

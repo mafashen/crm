@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <bean id="baseDao" class="daoImpl.classes.BaseDaoImpl" abstract="true">
+    	<property name="sf" ref="sessionFactory"></property>
+    </bean>
+    <bean id="ActDao" class="daoImpl.classes.ActDaoImpl" parent="baseDao">
+    </bean>
+    <bean id="ReviewDao" class="daoImpl.classes.ReviewDaoImpl" parent="baseDao"></bean>
+    <bean id="Review_CaseDao" class="daoImpl.classes.Review_CaseDaoImpl" parent="baseDao">
+    </bean>
+    <bean id="StudentDao" class="daoImpl.classes.StudentDaoImpl" parent="baseDao"></bean>
+    <!-- 配置Service -->
+    <bean id="ActService" class="serviceImpl.classes.ActServiceImpl">
+    	<property name="dao" ref="ActDao"></property>
+    </bean>
+    <bean id="ReviewService" class="serviceImpl.classes.ReviewServiceImpl">
+    	<property name="dao" ref="ReviewDao"></property>
+    </bean>
+    <bean id="Review_CaseService" class="serviceImpl.classes.Review_CaseServiceImpl">
+    	<property name="dao" ref="Review_CaseDao"></property>
+    </bean>
+   <!--  <bean id="StudentService" class="serviceImpl.student.StudentServiceImpl">
+    	<property name="dao" ref="StudentDao"></property>
+    </bean> -->
+    <!-- 配置Action -->
+    <bean id="claAction" class="action.classes.claAction" scope="prototype">
+    	<property name="actservice" ref="ActService"></property>
+    </bean>
+    <bean id="ReviewAction" class="action.classes.ReviewAction" scope="prototype">
+    	<property name="reviewservice" ref="ReviewService"></property>
+    	<property name="reviewcaseservice" ref="Review_CaseService"></property>
+    	<property name="studentservice" ref="studentService"></property>
+    </bean>
+    <!--<bean id="Review_CaseAction" class="action.classes.ReviewAction" scope="prototype">
+    </bean>
+--></beans>

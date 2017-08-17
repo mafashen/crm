@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Struts2配置文件的DTD信息 -->
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<!-- Struts2配置文件的根元素 -->
+<struts>
+	<constant name="struts.devMode" value="true"></constant>
+	<package name="system" extends="json-default" namespace="/system">
+		<action name="user-*" class="userManageAction" method="{1}">
+			<result name="list">/view/system/users.jsp</result>
+			<result name="one" type="json">
+    			<param name="root">user</param>
+    		</result>
+    		<result name="success" type="redirectAction">
+    			<param name="namespace">/system</param>
+    			<param name="actionName">user-execute</param>
+    		</result>
+		</action>
+		
+		<action name="notice-*" class="noticeManageAction" method="{1}">
+			<result name="find" type="stream">
+    			<param name="inputName">inputStream</param>
+    		</result>
+    		<result name="list">/view/system/notices.jsp</result>
+			<result name="one" type="json">
+    			<param name="root">notice</param>
+    		</result>
+    		<result name="success" type="redirectAction">
+    			<param name="namespace">/system</param>
+    			<param name="actionName">notice-execute</param>
+    		</result>
+		</action>
+		<action name="role-*" class="roleManageAction" method="{1}">
+    		<result name="list">/view/system/roles.jsp</result>
+    		<result name="update">/view/system/roles.jsp</result>
+			<result name="one" type="json">
+    			<param name="root">role</param>
+    		</result>
+    		<result name="success" type="redirectAction">
+    			<param name="namespace">/system</param>
+    			<param name="actionName">role-execute</param>
+    		</result>
+		</action>
+	</package>
+	
+</struts>

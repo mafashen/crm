@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Struts2配置文件的DTD信息 -->
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<!-- Struts2配置文件的根元素 -->
+<struts>
+	<package name="market" extends="json-default" namespace="/market">
+		<action name="state-*" class="stateAction" method="{1}">
+			<result name="success">/view/market/statelist.jsp</result>
+		</action>
+		<action name="consulation-*" class="consulationAction" method="{1}">
+			<result name="add">/view/market/success.jsp</result>
+			<result >/view/market/consulation-{1}.jsp</result>
+			<result name="test" type="stream">
+				<param name="inputName">inputStream</param>
+			</result>
+			<result name="change" type="redirectAction">
+				<param name="actionName">consulation-findAll</param>
+				<param name="nameSpace">/market</param>
+			</result>
+			
+		</action>
+		<action name="channel-*" class="channelAction" method="{1}">
+			<result name="add">/view/market/success.jsp</result>
+			<result name="test" type="stream">
+				<param name="inputName">inputStream</param>
+			</result>
+			<result >/view/market/channel-{1}.jsp</result>
+			<result name="change" type="redirectAction">
+				<param name="actionName">channel-findAll</param>
+				<param name="nameSpace">/market</param>
+			</result>
+			
+		</action>
+		<action name="customer-*" class="customerAction" method="{1}">
+			<result name="test" type="stream">
+				<param name="inputName">inputStream</param>
+			</result>
+			<result name="findBystate">/view/market/customer-findAll.jsp</result>
+			<result >/view/market/customer-{1}.jsp</result>
+			<result name="update" type="redirectAction">
+				<param name="actionName">customer-findAll</param>
+				<param name="nameSpace">/market</param>
+			</result>
+			
+			
+		</action>
+	</package>
+	
+</struts>

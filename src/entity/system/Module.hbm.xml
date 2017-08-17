@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping 
+PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="entity.system">
+    <class name="Module" table="module">
+        <id name="mid" >
+            <generator class="native"/>
+        </id>
+        <property name="m_name" />
+        <property name="url" />
+        
+        <many-to-one name="parent" class="Module" fetch="select">
+        	<column name="parent_id"/>
+        </many-to-one>
+        
+        <set name="child" inverse="true" cascade="save-update" lazy="false">
+            <key column="parent_id"></key>
+            <one-to-many class="Module"/>
+        </set>
+<!-- 
+        <set name="roles" table="role_module" inverse="true" cascade="save-update">
+            <key column="mid"></key>
+            <many-to-many class="Role" column="cid"/>
+        </set> -->
+    </class>
+</hibernate-mapping>

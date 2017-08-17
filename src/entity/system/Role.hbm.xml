@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="entity.system">
+	<class name="Role" table="role">
+		<id name="cid">
+			<generator class="native" />
+		</id>
+		<property name="name" />
+
+		<bag name="modules" table="role_module" lazy="false">
+			
+			<key column="cid"></key>
+			<many-to-many class="Module" column="mid" lazy="false" />
+		</bag>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="entity.market">
+
+    <class name="Customer" table="customer">
+        <id name="id" >
+            <generator class="native"/>
+        </id>
+        <property name="id_number" />
+        <property name="name" />
+        <property name="tel" />
+        <property name="sex" />
+        <property name="qq" />
+        <property name="customertype" />
+        <property name="major" />
+        <property name="school" />
+        <property name="city" />
+        <property name="education" />
+        <property name="intention" />
+        <property name="time" />
+        <property name="context" />
+        	
+        <many-to-one name="channel" class="Channel" column="channel_id" lazy="false" fetch="join" cascade=""></many-to-one>
+        <many-to-one name="state" class="State" column="state_id" lazy="false" fetch="join"></many-to-one>
+        <many-to-one name="founder" class="entity.system.User" column="founder_id" lazy="false" fetch="join"  ></many-to-one>
+        <many-to-one name="consultant" class="entity.system.User" column="consultant_id" lazy="false" fetch="join"  ></many-to-one>
+       	<many-to-one name="consulation" class="entity.market.Consulation" column="consulation_id"  lazy="false" fetch="join"/> 
+        
+       
+
+    </class>
+</hibernate-mapping>

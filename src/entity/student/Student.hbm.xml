@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="entity.student" >
+	<class name="Student" table="student" >
+		<id name="s_id"  >
+			<generator class="native"></generator>
+		</id>
+		<property name="s_name"  ></property>
+		<property name="s_sex"  ></property>
+		<many-to-one name="s_clazz" column="s_clazz" class="Clazz" lazy="false"></many-to-one>
+		<property name="s_graduate"  ></property>
+		<property name="s_education"  ></property>
+		<property name="s_major"  ></property>
+		<property name="s_place"  ></property>
+		<property name="s_tel"  ></property>
+		<property name="s_qq"  ></property>
+		<property name="s_sign_date"  ></property>
+	</class>
+</hibernate-mapping>

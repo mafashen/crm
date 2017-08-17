@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="entity.student" >
+	<class name="Check" table="checked" >
+		<id name="c_id"  >
+			<generator class="native"></generator>
+		</id>
+		<many-to-one name="s_id" column="s_id" class="Student" lazy="false"></many-to-one>
+		<property name="c_check_date"  ></property>
+		<property name="c_status"  ></property>
+	</class>
+</hibernate-mapping>
